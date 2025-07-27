@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Bot - Premium Koruma Paketleri</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Duyuru Bandı -->
+    <div class="announcement-banner">
+        <div class="announcement-content">
+            <span id="announcement-text">Hoş geldiniz! Premium Discord botumuzla sunucunuzu geliştirin!</span>
+        </div>
+    </div>
+
+    <!-- Ana İçerik -->
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>Roblox Bot Premium</h1>
+            </div>
+            <nav>
+                <a href="#packages">Paketler</a>
+                <a href="#features">Özellikler</a>
+                <a href="#contact">İletişim</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Premium Kalitede Roblox Abusesine Karşı Önlem</h2>
+            <p>Roblox gruplarınızı abuse'ye karşı otomatik önlem</p>
+            <div class="hero-features">
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Abuse Koruması</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-users"></i>
+                    <span>Grup Yönetimi</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-robot"></i>
+                    <span>Otomatik Sistem</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Güvenlik Raporları</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paketler -->
+        <section id="packages" class="packages">
+            <h2>Premium Paketler</h2>
+            <div class="packages-grid" id="packages-grid">
+                <!-- Paketler dinamik olarak yüklenecek -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Satın Alma Modal -->
+    <div id="purchase-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Ödeme Yöntemi Seçin</h3>
+            <div class="payment-methods">
+                <button class="payment-btn" data-method="iban">
+                    <i class="fas fa-university"></i>
+                    Banka Transferi (IBAN)
+                </button>
+                <button class="payment-btn" data-method="papara">
+                    <i class="fas fa-credit-card"></i>
+                    Papara
+                </button>
+                <button class="payment-btn" data-method="itemsatis">
+                    <i class="fas fa-shopping-cart"></i>
+                    ItemSatış
+                </button>
+            </div>
+            <div id="payment-info" class="payment-info"></div>
+        </div>
+    </div>
+
+    <!-- İletişim Modal -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-content contact-modal">
+            <span class="close">&times;</span>
+            <h3>İletişim</h3>
+            <p class="contact-info">Bizimle iletişime geçin: <strong>iletisim@buy.smmkiwi.com</strong></p>
+            
+            <form class="contact-form">
+                <div class="form-group">
+                    <label>E-posta Adresiniz:</label>
+                    <input type="email" id="contact-email" placeholder="ornek@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Başlık:</label>
+                    <input type="text" id="contact-subject" placeholder="Konu başlığı" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Mesajınız:</label>
+                    <div class="text-editor-toolbar">
+                        <button type="button" class="toolbar-btn" onclick="formatText('bold')" title="Kalın">
+                            <i class="fas fa-bold"></i>
+                        </button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('italic')" title="İtalik">
+                            <i class="fas fa-italic"></i>
+                        </button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('underline')" title="Altı Çizili">
+                            <i class="fas fa-underline"></i>
+                        </button>
+                        <div class="color-picker">
+                            <label>Renk:</label>
+                            <input type="color" id="text-color" onchange="formatText('foreColor', this.value)" value="#ffffff">
+                        </div>
+                    </div>
+                    <div id="contact-message" class="text-editor" contenteditable="true" placeholder="Mesajınızı buraya yazın..."></div>
+                </div>
+                
+                <button type="button" class="send-btn" onclick="sendContactEmail()">
+                    <i class="fas fa-paper-plane"></i> Mesaj Gönder
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-modal" class="modal">
+        <div class="modal-content admin-panel">
+            <span class="close">&times;</span>
+            <h3>Admin Panel</h3>
+            
+            <!-- Admin Giriş -->
+            <div id="admin-login" class="admin-section">
+                <h4>Giriş Yap</h4>
+                <input type="password" id="admin-password" placeholder="Admin Şifresi">
+                <button onclick="adminLogin()">Giriş</button>
+            </div>
+
+            <!-- Admin Kontrolleri -->
+            <div id="admin-controls" class="admin-section" style="display: none;">
+                <div class="admin-tabs">
+                    <button class="tab-btn active" onclick="showTab('packages-tab')">Paketler</button>
+                    <button class="tab-btn" onclick="showTab('announcements-tab')">Duyurular</button>
+                    <button class="tab-btn" onclick="showTab('payment-tab')">Ödeme Bilgileri</button>
+                </div>
+
+                <!-- Paket Yönetimi -->
+                <div id="packages-tab" class="tab-content active">
+                    <h4>Paket Yönetimi</h4>
+                    <div class="package-form">
+                        <input type="text" id="package-name" placeholder="Paket Adı">
+                        <input type="number" id="package-price" placeholder="Fiyat">
+                        <input type="text" id="package-duration" placeholder="Süre (örn: 1 Ay)">
+                        <textarea id="package-features" placeholder="Özellikler (her satıra bir özellik)"></textarea>
+                        <button onclick="addPackage()">Paket Ekle</button>
+                    </div>
+                    <div id="admin-packages-list"></div>
+                </div>
+
+                <!-- Duyuru Yönetimi -->
+                <div id="announcements-tab" class="tab-content">
+                    <h4>Duyuru Yönetimi</h4>
+                    <div class="announcement-form">
+                        <input type="text" id="announcement-input" placeholder="Duyuru metni">
+                        <button onclick="addAnnouncement()">Duyuru Ekle</button>
+                    </div>
+                    <div id="admin-announcements-list"></div>
+                </div>
+
+                <!-- Ödeme Bilgileri Yönetimi -->
+                <div id="payment-tab" class="tab-content">
+                    <h4>Ödeme Bilgileri Yönetimi</h4>
+                    <div id="payment-settings"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
